@@ -1,0 +1,33 @@
+tree("Root")
+    parallel
+		repeat mute tree("Patrol")
+
+tree("Patrol")
+	sequence
+		fallback
+			NearPlayer
+			sequence
+				SetTargetDestination
+				MoveToDestination
+        fallback
+            tree("Attack")
+            tree("Wander")
+
+
+tree("Attack")
+	sequence
+		SeeEnemy
+		TargetEnemy
+		LookAtTarget
+        while ShotLinedUp
+            sequence
+                Wait(0.3)
+                Fire
+
+
+tree("Wander")
+    sequence
+        PickRandomDestinationNearPlayer
+        MoveToDestination
+        Wait(2.0)
+    
