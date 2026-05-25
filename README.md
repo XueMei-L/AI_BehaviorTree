@@ -12,7 +12,7 @@ El objetivo de esta práctica es modificar el proyecto base *RobotGuard* para di
 
 ## 🌳 Estructura del Árbol de Comportamiento (Behavior Tree)
 
-El árbol está diseñado jerárquicamente priorizando la seguridad física del jugador antes que las acciones ofensivas o recreativas:
+El árbol es lo siguiente: 
 
 ```text
 tree("Root")
