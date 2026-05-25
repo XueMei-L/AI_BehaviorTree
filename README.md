@@ -21,14 +21,33 @@ tree("Root")
 
 tree("Patrol")
 	sequence
-		# 1. Prioridad Absoluta: Mantenerse cerca del jugador si se aleja
 		fallback
 			NearPlayer
 			sequence
 				SetTargetDestination
 				MoveToDestination
-		# 2. Toma de decisiones basada en el estado de salud y amenazas
 		fallback
-			tree("Protect")    # Si el jugador está herido y hay enemigo -> Interceptar
-			tree("Attack")     # Si el jugador está a salvo pero hay enemigo -> Atacar
-			tree("Wander")     # Si todo está en paz -> Patrullar alrededor
+			tree("Protect")
+			tree("Attack")
+			tree("Wander")
+tree("Protect")
+	sequence
+		while IsPlayerHealthLessThan(30.0)
+			while SeeEnemy()
+				MoveToInterceptionPoint
+tree("Attack")
+	sequence
+		SeeEnemy
+		TargetEnemy
+		LookAtTarget
+		fallback
+			while ShotLinedUp
+				sequence
+					Wait(0.3)
+					Fire
+tree("Wander")
+    sequence
+        PickRandomDestinationNearPlayer
+        MoveToDestination
+        Wait(2.0)
+    
